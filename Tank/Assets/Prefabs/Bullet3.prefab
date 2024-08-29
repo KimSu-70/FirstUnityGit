@@ -12,8 +12,6 @@ GameObject:
   - component: {fileID: 2997451720452318667}
   - component: {fileID: 9142864855721308216}
   - component: {fileID: 6043939168169904876}
-  - component: {fileID: -6563714472427973111}
-  - component: {fileID: -2851702961482003127}
   - component: {fileID: -5312338468714795906}
   m_Layer: 0
   m_Name: Bullet3
@@ -100,33 +98,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-6563714472427973111
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4730065028130632590}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 819a91ff0ad927149bed7b425fc3ccf0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 10
---- !u!114 &-2851702961482003127
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4730065028130632590}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86ca478119b512c409f3bff25791c8c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  returnPool: {fileID: 0}
-  returnTime: 5
 --- !u!54 &-5312338468714795906
 Rigidbody:
   m_ObjectHideFlags: 0
