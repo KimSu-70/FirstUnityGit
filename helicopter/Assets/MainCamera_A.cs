@@ -13,7 +13,7 @@ public class MainCamera_A : MonoBehaviour
     public float CameraSpeed = 10.0f;       
     Vector3 TargetPos;                      
 
-    void FixedUpdate()
+    void LateUpdate()
     {
         
         TargetPos = new Vector3(
