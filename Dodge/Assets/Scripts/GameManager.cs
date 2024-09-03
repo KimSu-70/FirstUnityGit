@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,11 +11,15 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameState curState;
     [SerializeField] PlayerController player;
     [SerializeField] TowerController[] towers;
+    [SerializeField] GameObject clearZone;
 
     [Header("UI")]
     [SerializeField] GameObject readyText;
     [SerializeField] GameObject gameOverText;
 
+    private float startTime;
+    private float bestScore;
+    private bool clearZoneActive;
 
     private void Start()
     {
@@ -32,6 +37,10 @@ public class GameManager : MonoBehaviour
 
         readyText.SetActive(true);
         gameOverText.SetActive(false);
+
+        bestScore = PlayerPrefs.GetFloat("BestScore", 0f);
+        clearZone.SetActive(false);
+        clearZoneActive = false;
     }
 
     private void Update()
@@ -45,11 +54,26 @@ public class GameManager : MonoBehaviour
         {
             SceneManager.LoadScene("SampleScene");
         }
+        if (curState == GameState.Running)
+        {
+            // 경과 시간 계산
+            float elapsedTime = Time.time - startTime;
+
+            // 20초 후 Clear Zone 활성화
+            if (!clearZoneActive && elapsedTime >= 20f)
+            {
+                clearZone.SetActive(true);
+                clearZoneActive = true;
+            }
+        }
     }
 
     public void GameStart()
     {
         curState = GameState.Running;
+        startTime = Time.time;
+        clearZone.SetActive(false);
+        clearZoneActive = false;
         // 타워들 공격개시
         foreach(TowerController tower in towers)
         {
@@ -71,5 +95,22 @@ public class GameManager : MonoBehaviour
 
         readyText.SetActive(false);
         gameOverText.SetActive(true);
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Trigger detected with: " + other.gameObject.name);
+
+        if (curState == GameState.Running && other.gameObject == player.gameObject)
+        {
+            float elapsedTime = Time.time - startTime;
+
+            if (elapsedTime > bestScore)
+            {
+                bestScore = elapsedTime;
+                PlayerPrefs.SetFloat("BestScore", bestScore);
+            }
+
+            GameOver();
+        }
     }
 }
