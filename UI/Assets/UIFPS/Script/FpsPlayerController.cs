@@ -11,6 +11,9 @@ public class FpsPlayerController : MonoBehaviour
     [SerializeField] private float lookSpeed;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float sensitivity = 2.0f; // 마우스 감도
+    [SerializeField] float repeatTime; // 연사 속도
+
+    Coroutine getbullet;
 
     private float verticalRotation = 0.0f; // 카메라의 수직 회전 각도
 
@@ -65,24 +68,46 @@ public class FpsPlayerController : MonoBehaviour
         playerCamera.localRotation = Quaternion.Euler(verticalRotation, 0, 0);
     }
 
-    private void bullets()
+    IEnumerator GetBullet()
     {
-        if
+        while (true)
+        {
+            Fire();
+            yield return new WaitForSeconds(repeatTime);
+        }
+    }
+
+    private void Fire()
+    {
+        if (model.curBullet > 0)
+        {
+            model.curBullet -= 1;
+        }
     }
 
     #region UI
 
     private void Updatebullet(int bullet)
     {
-        bulletText.text = $"{bullet}";
+        bulletText.text = $"{bullet} / {model.MaxBullet}";
         bulletSlider.value = bullet;
     }
 
     #endregion
 
+
     private void Update()
     {
         Rotates();
         Move();
+        if(Input.GetMouseButtonDown(0))
+        {
+            getbullet = StartCoroutine(GetBullet());
+        }
+        else if (Input.GetMouseButtonUp(0))
+        {
+            StopCoroutine(getbullet);
+        }
+
     }
 }
