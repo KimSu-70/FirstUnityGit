@@ -225,7 +225,7 @@ public class Player : MonoBehaviour
 
         public override void Exit()
         {
-
+            player.StopCoroutine(IGameOver(0f));
         }
 
         private IEnumerator IGameOver(float waitTime)
