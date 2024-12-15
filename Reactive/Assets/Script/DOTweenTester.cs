@@ -34,7 +34,10 @@ public class DOTweenTester : MonoBehaviour
         //transform.DOMove(des, 1f)
         //    .SetEase(Ease.Linear)
         //    .SetDelay(0.5f)
+
+            //  작업 시작시
             //.OnStart(() => Debug.Log("Started"))
+            //  작업 끝날을 때
             //.OnComplete(() => Debug.Log("Completed"));
 
         Sequence sequence = DOTween.Sequence();

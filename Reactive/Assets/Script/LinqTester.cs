@@ -46,6 +46,7 @@ public class LinqTester : MonoBehaviour
     //    return result;
     //}
 
+
     private List<MonsterData> monsters = new List<MonsterData>()
     {
         new MonsterData(MonsterType.Normal, 10, "²¿·¿"),
